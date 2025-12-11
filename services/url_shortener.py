@@ -20,6 +20,6 @@ class URLShortener:
         return new_commit.sha
 
     def get_url(self, shortened_url : str) -> str:
-        commit = self.repo.get_git_commit(shortened_url)
+        commit = self.repo.get_commit(shortened_url)
 
-        return commit.message
+        return commit.commit.message

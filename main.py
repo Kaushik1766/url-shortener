@@ -24,7 +24,7 @@ def main():
         input = sys.argv[2]
 
         if command == '-s':
-            print(shortener.shorten(input))
+            print(shortener.shorten(input)[:7])
         elif command=='-g':
             print(shortener.get_url(input))
 
