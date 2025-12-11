@@ -17,6 +17,7 @@ class URLShortener:
             parents=[latest_commit]
         )
 
+        # ref.edit(new_commit.sha)
         return new_commit.sha
 
     def get_url(self, shortened_url : str) -> str:
