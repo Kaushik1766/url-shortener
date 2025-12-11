@@ -1,5 +1,6 @@
 import os
 import sys
+import warnings
 
 from dotenv import load_dotenv
 from github import Github
@@ -7,6 +8,8 @@ from github import Github
 from services.url_shortener import URLShortener
 
 load_dotenv()
+warnings.filterwarnings('ignore')
+
 def main():
     try:
         access_token = os.getenv('GITHUB_ACESS_TOKEN')
@@ -31,9 +34,6 @@ def main():
     except RuntimeError:
         print('error occured')
         raise
-
-
-
 
 if __name__ == "__main__":
     main()
