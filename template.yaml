@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/aws/serverless-application-model/main/samtranslator/schema/schema.json
+
+Transform: AWS::Serverless-2016-10-31
+
+Description: URL shortener using github as storage
+
+Globals:
+  Function:
+    Architectures:
+      - arm64
+    MemorySize: 512
+    CodeUri: .
+    Runtime: python3.13
+    Timeout: 100
+
+Resources:
+  api:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+
+  encode:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: encode
+      Events:
+        apiEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref api
+            Path: /encode
+            Method: POST
+
+  decode:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: encode
+      Events:
+        apiEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref api
+            Path: /decode/{url}
+            Method: GET
