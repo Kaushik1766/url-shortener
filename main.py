@@ -54,7 +54,7 @@ if __name__ == "__main__":
     main()
 
 
-def encode(ctx, event):
+def encode(event, context):
     try:
         body = event["body"]
         data = json.loads(body)
@@ -68,7 +68,7 @@ def encode(ctx, event):
         return {"statusCode": 400, "body": json.dumps({"error": "Invalid input"})}
 
 
-def decode(ctx, event):
+def decode(event, context):
     try:
         path_params = event["pathParameters"]
         short_url = path_params["url"]

@@ -4,6 +4,14 @@ Transform: AWS::Serverless-2016-10-31
 
 Description: URL shortener using github as storage
 
+Parameters:
+  GithubToken:
+    Description: Github access token
+    Type: String
+  GithubRepo:
+    Description: Repo path
+    Type: String
+
 Globals:
   Function:
     Architectures:
@@ -12,6 +20,10 @@ Globals:
     CodeUri: .
     Runtime: python3.13
     Timeout: 100
+    Environment:
+      Variables:
+        GITHUB_ACESS_TOKEN: !Ref GithubToken
+        URL_REPO: !Ref GithubRepo
 
 Resources:
   api:
@@ -22,7 +34,7 @@ Resources:
   encode:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: encode
+      Handler: main.encode
       Events:
         apiEvent:
           Type: Api
@@ -34,7 +46,7 @@ Resources:
   decode:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: encode
+      Handler: main.decode
       Events:
         apiEvent:
           Type: Api
