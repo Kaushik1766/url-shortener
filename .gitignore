@@ -11,3 +11,4 @@ wheels/
 
 # Dev environments
 .env
+samconfig.toml

@@ -55,6 +55,8 @@ if __name__ == "__main__":
 
 
 def encode(event, context):
+    print(event)
+    print(context)
     try:
         body = event["body"]
         data = json.loads(body)
@@ -75,7 +77,7 @@ def decode(event, context):
 
         url = shortener.get_url(short_url)
 
-        return {"statusCode": 200, "body": json.dumps({"url": url})}
+        return {"statusCode": 301, "headers": {"Location": url}}
 
     except KeyError as e:
         print(f"KeyError: {e}")
