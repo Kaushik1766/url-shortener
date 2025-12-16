@@ -41,7 +41,7 @@ Resources:
           Properties:
             RestApiId: !Ref api
             Path: /encode
-            Method: POST
+            Method: GET
 
   decode:
     Type: AWS::Serverless::Function

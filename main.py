@@ -58,12 +58,17 @@ def encode(event, context):
     print(event)
     print(context)
     try:
-        body = event["body"]
-        data = json.loads(body)
+        queryParams = event["queryStringParameters"]
+        url = queryParams["url"]
 
-        s_url = shortener.shorten(data["url"])
+        s_url = shortener.shorten(url)
 
-        return {"statusCode": 200, "body": json.dumps({"shortenedUrl": s_url})}
+        return {
+            "statusCode": 200,
+            "body": json.dumps(
+                {"shortenedUrl": f"https://shorturl.kaushiksaha.me/decode/{s_url[:7]}"}
+            ),
+        }
 
     except KeyError as e:
         print(f"KeyError: {e}")
